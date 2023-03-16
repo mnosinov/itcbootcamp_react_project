@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import './Card.css';
+import { getData } from './config';
 
 const Card = () => {
 
 	const [ cardData, setCardData ] = useState();
-	const [ hello, setHello ] = useState();
 
 	// 1. useEffect - когда не передается второй аргумент
 	//useEffect( () => {
@@ -17,16 +17,28 @@ const Card = () => {
 	//}, []);
 	// 3. useEffect - когда передается второй аргумент - значит есть зависимости
 	useEffect( () => {
-		console.log("hello:", hello, "card data:", cardData);
-	}, [hello, cardData]);
+		getData().then(res => {
+			console.log(res);
+			setCardData(res);
+		});
+	}, []);
 
   return (
-    <div>
-			<div onClick={ () => setHello('hello') }>set Hello</div>
-			<div onClick={ () => setHello('hello 2') }>set Hello 2</div>
-			<div onClick={ () => setCardData('data 12') }>set data</div>
-			<div onClick={ () => setCardData('data 122') }>set data 2</div>
-    </div>
+		<div className="card-container">
+			<table border="1">
+				<thead><tr><th>Name</th><th>Surname</th><th>Age</th></tr></thead>
+				<tbody>
+					{
+						cardData ?
+							<tr>
+								<td>{cardData.name}</td>
+								<td>{cardData.surName}</td>
+								<td>{cardData.age}</td>
+							</tr> : null
+					}
+				</tbody>
+			</table>
+		</div>
   );
 }
 
