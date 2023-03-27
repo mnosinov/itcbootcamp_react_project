@@ -26,14 +26,14 @@ const Card = () => {
   return (
 		<div className="card-container">
 			<table border="1">
-				<thead><tr><th>Name</th><th>Surname</th><th>Age</th></tr></thead>
+				<thead><tr><th>Name</th><th>Coach</th><th>Captain</th></tr></thead>
 				<tbody>
 					{
 						cardData ?
 							<tr>
 								<td>{cardData.name}</td>
-								<td>{cardData.surName}</td>
-								<td>{cardData.age}</td>
+								<td>{cardData.coach}</td>
+								<td>{cardData.captain}</td>
 							</tr> : null
 					}
 				</tbody>
